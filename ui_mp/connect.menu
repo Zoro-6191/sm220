@@ -37,6 +37,7 @@
 			name			"textshiz"
 			rect			-19 21 0 0 HORIZONTAL_ALIGN_RIGHT VERTICAL_ALIGN_TOP
 			style			WINDOW_STYLE_EMPTY
+			forecolor		0 0 0 1
 			textalign		ITEM_ALIGN_RIGHT
 			exp				text(BUILD_DATE);
 			textscale		0.3
@@ -48,6 +49,7 @@
 			name			"textshiz"
 			rect			-20 20 0 0 HORIZONTAL_ALIGN_RIGHT VERTICAL_ALIGN_TOP
 			style			WINDOW_STYLE_EMPTY
+			forecolor		1 1 1 1
 			textalign		ITEM_ALIGN_RIGHT
 			exp				text(BUILD_DATE);
 			textscale		0.3
