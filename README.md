@@ -1,6 +1,9 @@
 # sm220
 Scrim Promod based on pml220, free to use for everyone.
 
+Major Fixes:
+- Fixed smoke cheat through ambient occlusion.
+
 You won't feel any difference in frontend, it'll only be smoother
 
 Here are all the code changes:
