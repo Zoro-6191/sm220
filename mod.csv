@@ -46,6 +46,9 @@ rawfile,maps/mp/gametypes/sd.gsc
 rawfile,maps/mp/gametypes/dm.gsc
 rawfile,maps/mp/gametypes/war.gsc
 
+xmodel,viewhands_desert_opfor
+xmodel,viewmodel_base_viewhands
+
 rawfile,maps/mp/mp_backlot.gsc
 rawfile,maps/mp/mp_citystreets.gsc
 rawfile,maps/mp/mp_crash.gsc
