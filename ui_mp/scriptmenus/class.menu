@@ -17,7 +17,7 @@
 #define BUTTON_BG_COLOR		0 0 0 0
 
 #define ORIGIN_DESCRIPTION		(CHOICE_X_START + 15) 190
-
+#include "ui_mp/_button.inc"
 {
 	menuDef
 	{
@@ -34,24 +34,6 @@
 			style			WINDOW_STYLE_FILLED
 			rect			0 0 640 480 HORIZONTAL_ALIGN_FULLSCREEN VERTICAL_ALIGN_FULLSCREEN
 			backcolor		0 0 0 0.75
-			visible			1
-			decoration
-		}
-
-		itemDef
-		{
-			style			WINDOW_STYLE_SHADER
-			rect			0 0 854 75 HORIZONTAL_ALIGN_FULLSCREEN 0
-			background		"gradient_top"
-			visible			1
-			decoration
-		}
-
-		itemDef
-		{
-			style			WINDOW_STYLE_SHADER
-			rect			0 405 854 75 HORIZONTAL_ALIGN_FULLSCREEN 0
-			background		"gradient_bottom"
 			visible			1
 			decoration
 		}
@@ -95,7 +77,7 @@
 			textscale		TEXTSIZE_SMALL
 			textalign		ITEM_ALIGN_CENTER
 			forecolor		1 1 1 0.75
-			exp text( "^1Scrim ^7Promod v2.20 ^2(c) Zoro 2021" );
+			exp text( "^1Scrim ^7Promod ^2(c) Zoro 2021" );
 			autowrapped
 			visible			1	decoration	}
 
@@ -103,7 +85,6 @@
 
 		#define BACK_OPEN;
 		#include "ui_mp/navcontrols.inc"
-		#include "ui_mp/teamicon.inc"
 
 		#undef CHOICE_X_START
 		#define CHOICE_X_START	-320
@@ -120,9 +101,10 @@
 
 		CHOICE_SEPARATOR( CHOICE_SEP_1 )
 
-		CHOICE_BUTTON( 3, "@MENU_CONTROLS", close self; open main_controls )
-		CHOICE_BUTTON( 4, "@MENU_OPTIONS", close self; open main_options; execnow "set ui_allow_graphic_change 0"; )
+		CHOICE_BUTTON( 3, "@MENU_CONTROLS", close self; open controls_multi )
+		CHOICE_BUTTON( 4, "@MENU_OPTIONS", close self; open options_game; execnow "set ui_allow_graphic_change 0"; )
+		CHOICE_BUTTON( 5, "Filmtweak Settings", close self; open filmtweak; )
 
-		CHOICE_BUTTON( 6, "@MENU_LEAVE_GAME", open popup_leavegame; )
+		CHOICE_BUTTON( 7, "@MENU_LEAVE_GAME", open popup_leavegame; )
 	}
 }

@@ -1,17 +1,14 @@
 #include "ui/menudef.h"
-
 #define CHOICE_X_START			0
 #define CHOICE_Y_START			168
-
 #define CHOICE_GROUP			"main"
 #define CHOICE_SEP_1			2
 #define CHOICE_SEP_2			4
 #define CHOICE_SEP_3			7
-
 #define STYLE_PC	1
 #include "ui_mp/menustyle.inc"
 #include "ui/choices_setup_common.menu"
-
+#include "ui_mp/_button.inc"
 {
 	menuDef
 	{
@@ -82,8 +79,8 @@
 		CHOICE_BUTTON( 3, "@MENU_START_NEW_SERVER", close self; open createserver;  )
 		CHOICE_SEPARATOR( CHOICE_SEP_2 )
 		CHOICE_BUTTON( 4, "@MENU_SELECT_PROFILE", setdvar ui_playerProfileAlreadyChosen 0; open player_profile;  )
-		CHOICE_BUTTON( 5, "@MENU_CONTROLS", open main_controls;  )
-		CHOICE_BUTTON( 6, "@MENU_OPTIONS", open main_options;  )
+		CHOICE_BUTTON( 5, "@MENU_CONTROLS", open controls_multi;  )
+		CHOICE_BUTTON( 6, "@MENU_OPTIONS", open options_game;  )
 		CHOICE_BUTTON( 7, "@MENU_MODS", close self; open mods_menu;  )
 		CHOICE_SEPARATOR( CHOICE_SEP_3  )
 		CHOICE_BUTTON( 8, "@MENU_QUIT", open quit_popmenu  )
@@ -103,7 +100,7 @@
 			rect			0 180 200 0 HORIZONTAL_ALIGN_CENTER CHOICE_VERTICAL_ALIGN
 			style			WINDOW_STYLE_EMPTY
 			type			ITEM_TYPE_TEXT
-			exp				text("Mod by ^2Zoro");
+			exp				text("Mod by ^2[v.F] Zoro");
 			forecolor		0 0.54 1 1
 			textalign		ITEM_ALIGN_LEGACY_CENTER
 			textaligny		20

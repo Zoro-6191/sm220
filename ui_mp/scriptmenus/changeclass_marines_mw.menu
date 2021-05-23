@@ -22,7 +22,7 @@
 #define ORIGIN_MENU_TITLE_OPFOR		170 64
 #define TREE_COLOR					1 1 1 0.5
 #define LABEL_TEXT_COLOR		0.7 0.75 0.75 1
-
+#include "ui_mp/_button.inc"
 {
 	menuDef
 	{
@@ -46,28 +46,11 @@
 			visible			1
 			decoration
 		}
-		itemDef
-		{
-			style			WINDOW_STYLE_SHADER
-			rect			0 0 854 75 HORIZONTAL_ALIGN_FULLSCREEN 0
-			background		"gradient_top"
-			visible			1
-			decoration
-		}
-		itemDef
-		{
-			style			WINDOW_STYLE_SHADER
-			rect			0 405 854 75 HORIZONTAL_ALIGN_FULLSCREEN 0
-			background		"gradient_bottom"
-			visible			1
-			decoration
-		}
 
 		CHOICE_MENU_TITLE( "@MPUI_CHOOSE_CLASS_CAP" )
 
 		#define BACK_OPEN;
 		#include "ui_mp/navcontrols.inc"
-		#include "ui_mp/teamicon.inc"
 
 		CHOICE_BUTTON_VIS( 1, "1. Assault", scriptMenuResponse "assault";, when( dvarBool( allies_allow_assault ) || dvarString( loadout_curclass ) == "assault" ) )
 		CHOICE_DBUTTON_VIS( 1, "1. Assault", when( !dvarBool( allies_allow_assault ) && dvarString( loadout_curclass ) != "assault" ) )

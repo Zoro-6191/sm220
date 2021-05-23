@@ -9,8 +9,12 @@ setPlayerModels()
 	axisCharSet = tableLookup( "mp/mapsTable.csv", 0, getDvar( "mapname" ), 2 );
 	if ( isDefined( axisCharSet ) && axisCharSet != "" ) game["axis_soldiertype"] = axisCharSet;
 	else if ( !isDefined( game["axis_soldiertype"] ) || !isDefined( game["axis"] ) )
-	{ game["axis_soldiertype"] = "desert"; game["axis"] = "arab"; }
-	if ( game["allies_soldiertype"] == "desert" ){
+	{
+		game["axis_soldiertype"] = "desert";
+		game["axis"] = "arab";
+	}
+	if ( game["allies_soldiertype"] == "desert" )
+	{
 		mptype\mptype_ally_cqb::precache();
 		mptype\mptype_ally_sniper::precache();
 		mptype\mptype_ally_engineer::precache();
@@ -22,7 +26,8 @@ setPlayerModels()
 		game["allies_model"]["RECON"] = mptype\mptype_ally_engineer::main;
 		game["allies_model"]["SPECOPS"] = mptype\mptype_ally_cqb::main;
 	}
-	else if ( game["allies_soldiertype"] == "urban" ){
+	else if ( game["allies_soldiertype"] == "urban" )
+	{
 		mptype\mptype_ally_urban_sniper::precache();
 		mptype\mptype_ally_urban_support::precache();
 		mptype\mptype_ally_urban_assault::precache();
@@ -34,7 +39,8 @@ setPlayerModels()
 		game["allies_model"]["RECON"] = mptype\mptype_ally_urban_recon::main;
 		game["allies_model"]["SPECOPS"] = mptype\mptype_ally_urban_specops::main;
 	}
-	else{
+	else
+	{
 		mptype\mptype_ally_woodland_assault::precache();
 		mptype\mptype_ally_woodland_recon::precache();
 		mptype\mptype_ally_woodland_sniper::precache();

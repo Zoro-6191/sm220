@@ -102,7 +102,9 @@ quickpromod(response)
 			break;
 
 		case "3":
-			self suicide();
+				if( isDefined( game["state"] ) && game["state"] == "postgame" || self.sessionteam == "spectator" )
+					break;
+				self suicide();
 			break;
 
 		case "4":

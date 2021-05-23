@@ -2,13 +2,16 @@ main()
 {
 	setDvar( "scr_sd_bombtimer", 45 );
 	setDvar( "scr_sd_defusetime", 7 );
+	setDvar( "scr_sd_multibomb", 0 );
+	setDvar( "scr_sd_numlives", 1 );
 	setDvar( "scr_sd_planttime", 5 );
 	setDvar( "scr_sd_playerrespawndelay", 0 );
-	setDvar( "scr_sd_roundlimit", 24 );
-	setDvar( "scr_sd_roundswitch", 12 );
+	setDvar( "scr_sd_roundlimit", 20 );
+	setDvar( "scr_sd_roundswitch", 10 );
 	setDvar( "scr_sd_scorelimit", 0 );
 	setDvar( "scr_sd_timelimit", 1.75 );
 
+	setDvar( "scr_war_numlives", 0 );
 	setDvar( "scr_war_playerrespawndelay", 0 );
 	setDvar( "scr_war_roundlimit", 2 );
 	setDvar( "scr_war_scorelimit", 0 );
@@ -47,6 +50,10 @@ main()
 	setDvar( "class_sniper_camo", "camo_none" );
 
 	setDvar( "scr_team_fftype", 1 );
+	setDvar( "scr_team_teamkillpointloss", 5 );
+	setDvar( "scr_game_deathpointloss", 0 );
+	setDvar( "scr_game_suicidepointloss", 0 );
+	setDvar( "scr_player_suicidespawndelay", 0 );
 	setDvar( "scr_player_forcerespawn", 1 );
 
 	setDvar( "bg_fallDamageMinHeight", 140 );
@@ -55,6 +62,10 @@ main()
 	setDvar( "scr_game_matchstarttime", 10 );
 	setDvar( "scr_enable_hiticon", 2 );
 	setDvar( "scr_enable_scoretext", 1 );
+
+	setDvar( "logfile", 0 );
+	setDvar( "g_log", "games_mp.log" );
+	setDvar( "g_logSync", 0 );
 
 	setDvar( "g_inactivity", 0 );
 	setDvar( "g_no_script_spam", 1 );
@@ -67,6 +78,14 @@ main()
 	setDvar( "sv_timeout", 240 );
 	setDvar( "sv_zombietime", 2 );
 	setDvar( "sv_floodprotect", 4 );
+	setDvar( "sv_kickBanTime", 0 );
+	setDvar( "sv_disableClientConsole", 0 );
+	setDvar( "sv_voice", 0 );
 	setDvar( "sv_clientarchive", 1 );
 	setDvar( "timescale", 1 );
+
+	setDvar( "g_allowVote", 0 );
+	setDvar( "scr_game_allowkillcam", 0 );
+	setDvar( "scr_game_spectatetype", 1 );
+	setDvar( "scr_hardcore", 0 );
 }

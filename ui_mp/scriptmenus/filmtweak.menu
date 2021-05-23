@@ -1,0 +1,286 @@
+#include "ui/menudef.h"
+#include "ui_mp/common_macro.inc"
+
+#define CHOICE_SIZE_X			150
+#define CHOICE_SIZE_Y			22
+
+#define CHOICE_X_START			0
+#define CHOICE_Y_START			50
+
+#define CHOICE_SEP_1			3
+#define CHOICE_SEP_2			8
+#define CHOICE_SEP_3			10
+
+#include "ui_mp/menustyle.inc"
+#include "ui_mp/choices_setup_teams.menu"
+
+#define ORIGIN_DESCRIPTION		(CHOICE_X_START + 15) 190
+
+#undef CHOICE_DVARSLIDER_VIS
+#define CHOICE_DVARSLIDER_VIS( itemIndex, textArg, dvarArg, defaultArg, minArg, maxArg, actionArg, visArg ) \
+		CHOICE_BUTTON( itemIndex, textArg, actionArg ) \
+		CHOICE_HIGHLIGHT( itemIndex, 1 ) \
+		itemDef \
+		{ \
+			type			ITEM_TYPE_SLIDER \
+			dvarfloat		dvarArg defaultArg minArg maxArg \
+			rect			(CHOICE_X_START + CHOICE_SIZE_X + CHOICE_X_SPACING * CHOICE_COL( itemIndex ) + 10 ) CHOICE_Y( itemIndex ) 110 CHOICE_SIZE_Y CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN \
+			textalign		ITEM_ALIGN_MIDDLE_LEFT \
+			textscale		CHOICE_TEXTSIZE \
+			textstyle		ITEM_TEXTSTYLE_SHADOWED \
+			style			WINDOW_STYLE_FILLED \
+			forecolor		CHOICE_TEXTCOLOR \
+			onFocus			{ play CHOICE_FOCUS_SOUND }	\
+			visible			visArg \
+		}
+
+#define CHOICE_DVARSLIDER_VIS_COMPLETE( itemIndex, textArg, dvarArg, uiarg,defaultArg, minArg, maxArg, actionArg, visarg )	\
+		CHOICE_DVARSLIDER_VIS( itemIndex, textArg, uiarg, defaultArg, minArg, maxArg, actionArg, visarg )	\
+		itemDef \
+		{ \
+			type			ITEM_TYPE_EDITFIELD \
+			text			" " \
+			dvar			uiarg \
+			rect			(CHOICE_X_START + CHOICE_SIZE_X + CHOICE_X_SPACING * CHOICE_COL( itemIndex ) + 120 ) CHOICE_Y( itemIndex ) 55 (CHOICE_SIZE_Y-4) CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN \
+			backcolor		0 0 0 0.3	\
+			border			WINDOW_BORDER_VERT	\
+			bordercolor		0.5 0.5 0.5 0.5	\
+			textalign		ITEM_ALIGN_MIDDLE_LEFT \
+			textscale		CHOICE_TEXTSIZE \
+			textstyle		ITEM_TEXTSTYLE_SHADOWED \
+			style			WINDOW_STYLE_FILLED \
+			forecolor		CHOICE_TEXTCOLOR \
+			onFocus			{ play CHOICE_FOCUS_SOUND; setcolor bordercolor CHOICE_TEXTCOLOR }	\
+			leaveFocus		{ setcolor bordercolor 0.5 0.5 0.5 0.5 }	\
+			visible			1 \
+			maxChars		4 \
+			maxpaintchars	4 \
+		}
+		
+#define CHOICE_TINTEDIT( itemIndex, textArg, dvarArg, uiarg, actionArg ) \
+		CHOICE_BUTTON( itemIndex, textArg, actionArg ) \
+		CHOICE_HIGHLIGHT( itemIndex, 1 ) \
+		itemDef \
+		{ \
+			type			ITEM_TYPE_EDITFIELD \
+			text			" " \
+			dvar			uiarg \
+			rect			(CHOICE_X_START + CHOICE_SIZE_X + CHOICE_X_SPACING * CHOICE_COL( itemIndex ) + 20 ) CHOICE_Y( itemIndex ) 120 (CHOICE_SIZE_Y-4) CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN \
+			backcolor		0 0 0 0.3	\
+			border			WINDOW_BORDER_VERT	\
+			bordercolor		0.5 0.5 0.5 0.5	\
+			textalign		ITEM_ALIGN_MIDDLE_LEFT \
+			textscale		CHOICE_TEXTSIZE \
+			textstyle		ITEM_TEXTSTYLE_SHADOWED \
+			style			WINDOW_STYLE_FILLED \
+			forecolor		CHOICE_TEXTCOLOR \
+			onFocus			{ play CHOICE_FOCUS_SOUND; setcolor bordercolor CHOICE_TEXTCOLOR }	\
+			leaveFocus		{ setcolor bordercolor 0.5 0.5 0.5 0.5 }	\
+			visible			1 \
+			maxChars		16 \
+			maxpaintchars	16 \
+		}
+		
+#define APPLYEDIT	\
+		{	\
+			exec "setfromdvar r_gamma ui_gamma";	\
+			exec "setfromdvar r_filmtweakbrightness ui_filmtweakbrightness";	\
+			exec "setfromdvar r_filmtweakDesaturation ui_filmtweakDesaturation";	\
+			exec "setfromdvar r_filmtweakContrast ui_filmtweakContrast";	\
+			exec "setfromdvar r_filmtweakLighttint ui_filmtweakLighttint";	\
+			exec "setfromdvar r_filmtweakdarktint ui_filmtweakdarktint";	\
+		}
+		
+#define UNDOALL	\
+		{	\
+			exec "setfromdvar ui_gamma r_gamma";	\
+			exec "setfromdvar ui_filmtweakbrightness r_filmtweakbrightness";	\
+			exec "setfromdvar ui_filmtweakDesaturation r_filmtweakDesaturation";	\
+			exec "setfromdvar ui_filmtweakContrast r_filmtweakContrast";	\
+			exec "setfromdvar ui_filmtweakLighttint r_filmtweakLighttint";	\
+			exec "setfromdvar ui_filmtweakdarktint r_filmtweakdarktint";	\
+		}
+		
+#define RESETDEFAULT	\
+		{	\
+			exec "set r_gamma 0.8";	\
+			exec "set r_filmtweakbrightness 0";	\
+			exec "set r_filmtweakDesaturation 0.2";	\
+			exec "set r_filmtweakContrast 0.4";	\
+			exec "set r_filmtweakLighttint 1.1 1.05 0.85";	\
+			exec "set r_filmtweakdarktint 0.7 0.85 1";	\
+		}
+
+#define UNDO( itemIndex, actionArg, visArg )	\
+		itemDef	\
+		{	\
+			rect			(CHOICE_X_START + CHOICE_SIZE_X + CHOICE_X_SPACING * CHOICE_COL( itemIndex ) + 180 ) CHOICE_Y( itemIndex ) (CHOICE_SIZE_Y+20) (CHOICE_SIZE_Y-4) CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN \
+			style			WINDOW_STYLE_FILLED	\
+			type			ITEM_TYPE_BUTTON	\
+			textalign		ITEM_ALIGN_MIDDLE_CENTER \
+			textfont		0	\
+			textscale		0.3 \
+			textalignx		-1	\
+			textaligny		-1	\
+			textstyle		ITEM_TEXTSTYLE_SHADOWED \
+			text			"Undo"	\
+			border			1	\
+			bordercolor		0.5 0.5 0.5 0.5	\
+			onFocus			{ play CHOICE_FOCUS_SOUND; setcolor bordercolor CHOICE_TEXTCOLOR }	\
+			leaveFocus		{ setcolor bordercolor 0.5 0.5 0.5 0.5 }	\
+			action			{ play "mouse_click"; actionArg }	\
+			visible			when( visArg ) \
+		}
+
+menuDef
+{
+	name				"filmtweak"
+	rect				0 0 640 480
+	focuscolor		COLOR_FOCUSED
+	style			WINDOW_STYLE_EMPTY
+	//blurWorld		7
+	onOpen
+	{
+		setLocalVarBool ui_hideBack 1;
+		exec "setfromdvar ui_gamma r_gamma";
+		exec "setfromdvar ui_filmtweakbrightness r_filmtweakbrightness";
+		exec "setfromdvar ui_filmtweakDesaturation r_filmtweakDesaturation";
+		exec "setfromdvar ui_filmtweakContrast r_filmtweakContrast";
+		exec "setfromdvar ui_filmtweakLighttint r_filmtweakLighttint";	
+		exec "setfromdvar ui_filmtweakdarktint r_filmtweakdarktint";	
+	}
+	onEsc		{ close self; }
+	
+	execKey "a" APPLYEDIT 
+	execKey "z" UNDOALL 
+	execKey "R" RESETDEFAULT 
+	
+	itemDef
+	{
+		style			WINDOW_STYLE_FILLED
+		rect			-500 0 520 480 HORIZONTAL_ALIGN_CENTER 0
+		backcolor		0 0 0 0.75
+		visible			1
+		decoration
+	}
+
+	CHOICE_MENU_TITLE( "Filmtweak Settings" )
+	
+	#define BACK_OPEN;
+	#include "ui_mp/navcontrols.inc"
+	
+	#include "ui_mp/_button.inc"
+	
+	itemDef
+	{
+		name		"warning"
+		rect		10 51 0 0 HORIZONTAL_ALIGN_LEFT VERTICAL_ALIGN_TOP
+		style		WINDOW_STYLE_EMPTY
+		textfont	UI_FONT_NORMAL
+		textalign	ITEM_ALIGN_LEFT
+		textScale	CHOICE_TEXTSIZE
+		textstyle	ITEM_TEXTSTYLE_SHADOWEDMORE
+		forecolor	CHOICE_TEXTCOLOR
+		exp			text("Don't change these settings\nunless you know what you're doing.");
+		visible		0
+	}
+	
+	#define FT_START 1
+
+	CHOICE_BUTTON( 2, "r_filmusetweaks", exec "openscriptmenu quickpromodgfx 2" )
+	#define		X_OFFSET	20
+	itemDef
+	{
+		rect		(CHOICE_X_START+CHOICE_SIZE_X+X_OFFSET) (CHOICE_Y_START+(FT_START+1)*CHOICE_SIZE_Y) 0 0 CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN
+		style		WINDOW_STYLE_EMPTY
+		textfont	UI_FONT_NORMAL
+		textalign	ITEM_ALIGN_LEFT
+		textScale	CHOICE_TEXTSIZE
+		textstyle	ITEM_TEXTSTYLE_SHADOWEDMORE
+		forecolor	CHOICE_TEXTCOLOR
+		exp			text("Disabled");
+		visible		when( dvarstring("r_filmusetweaks") == "0" )
+	}
+	itemDef
+	{
+		rect		(CHOICE_X_START+CHOICE_SIZE_X+X_OFFSET) (CHOICE_Y_START+(FT_START+1)*CHOICE_SIZE_Y) 0 0 CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN
+		style		WINDOW_STYLE_EMPTY
+		textfont	UI_FONT_NORMAL
+		textalign	ITEM_ALIGN_LEFT
+		textScale	CHOICE_TEXTSIZE
+		textstyle	ITEM_TEXTSTYLE_SHADOWEDMORE
+		forecolor	CHOICE_TEXTCOLOR
+		exp			text("Enabled");
+		visible		when( dvarstring("r_filmusetweaks") == "1" )
+	}
+	
+	CHOICE_BUTTON( 3, "Sunlight", exec "openscriptmenu quickpromodgfx 1" )
+	#define Y_OFFSET 2
+	itemDef
+	{
+		rect		(CHOICE_X_START+CHOICE_SIZE_X+X_OFFSET) (CHOICE_Y_START+(FT_START+2)*CHOICE_SIZE_Y+Y_OFFSET) 0 0 CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN
+		style		WINDOW_STYLE_EMPTY
+		textfont	UI_FONT_NORMAL
+		textalign	ITEM_ALIGN_LEFT
+		textScale	CHOICE_TEXTSIZE
+		textstyle	ITEM_TEXTSTYLE_SHADOWEDMORE
+		forecolor	CHOICE_TEXTCOLOR
+		exp			text("Medium");
+		visible		when( stat(1) == 0 ) // stat 1 = PROMOD_SUNLIGHT
+		decoration
+	}
+	itemDef
+	{
+		rect		(CHOICE_X_START+CHOICE_SIZE_X+X_OFFSET) (CHOICE_Y_START+(FT_START+2)*CHOICE_SIZE_Y+Y_OFFSET) 0 0 CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN
+		style		WINDOW_STYLE_EMPTY
+		textfont	UI_FONT_NORMAL
+		textalign	ITEM_ALIGN_LEFT
+		textScale	CHOICE_TEXTSIZE
+		textstyle	ITEM_TEXTSTYLE_SHADOWEDMORE
+		forecolor	CHOICE_TEXTCOLOR
+		exp			text("Maximum");
+		visible		when( stat(1) == 1 )
+		decoration
+	}
+	itemDef
+	{
+		rect		(CHOICE_X_START+CHOICE_SIZE_X+X_OFFSET) (CHOICE_Y_START+(FT_START+2)*CHOICE_SIZE_Y+Y_OFFSET) 0 0 CHOICE_HORIZONTAL_ALIGN CHOICE_VERTICAL_ALIGN
+		style		WINDOW_STYLE_EMPTY
+		textfont	UI_FONT_NORMAL
+		textalign	ITEM_ALIGN_LEFT
+		textScale	CHOICE_TEXTSIZE
+		textstyle	ITEM_TEXTSTYLE_SHADOWEDMORE
+		forecolor	CHOICE_TEXTCOLOR
+		exp			text("Disabled");
+		visible		when( stat(1) == 2 )
+		decoration
+	}
+	
+	CHOICE_SEPARATOR( CHOICE_SEP_1 )
+	// to-do: adjust slider to allow random clicking, apply restore undo restoredefault
+	CHOICE_DVARFLOATLIST( 4, "r_filmtweakEnable", r_filmtweakEnable, { "Disabled" 0 "Enabled" 1 }, ; )
+	CHOICE_DVARSLIDER_VIS_COMPLETE( 5, "r_gamma", r_gamma, ui_gamma, 0.8, 0.5, 3, exec "set ui_gamma 0.8";, 1 ) UNDO( FT_START+4, exec "setfromdvar ui_gamma r_gamma", dvarstring(ui_gamma) != dvarstring(r_gamma) )
+	CHOICE_DVARSLIDER_VIS_COMPLETE( 6, "r_filmtweakbrightness", r_filmtweakbrightness, ui_filmtweakbrightness, 0, -1, 1, exec "set ui_filmtweakbrightness 0";, 1 ) UNDO( FT_START+5, exec "setfromdvar ui_filmtweakbrightness r_filmtweakbrightness", dvarstring(ui_filmtweakbrightness) != dvarstring(r_filmtweakbrightness) )
+	CHOICE_DVARSLIDER_VIS_COMPLETE( 7, "r_filmtweakDesaturation", r_filmtweakDesaturation, ui_filmtweakDesaturation, 0.2, 0, 1, exec "set ui_filmtweakDesaturation 0.2";, 1 ) UNDO( FT_START+6, exec "setfromdvar ui_filmtweakDesaturation r_filmtweakDesaturation", dvarstring(ui_filmtweakDesaturation) != dvarstring(r_filmtweakDesaturation) )
+	CHOICE_DVARSLIDER_VIS_COMPLETE( 8, "r_filmtweakContrast", r_filmtweakContrast, ui_filmtweakContrast, 0.4, 0, 4, exec "set ui_filmtweakContrast 1.4";, 1 ) UNDO( FT_START+7, exec "setfromdvar ui_filmtweakContrast r_filmtweakContrast", dvarstring(ui_filmtweakContrast) != dvarstring(r_filmtweakContrast) )
+	
+	CHOICE_SEPARATOR( CHOICE_SEP_2 )
+	
+	CHOICE_TINTEDIT( 9, "r_filmtweakLighttint", r_filmtweakLighttint, ui_filmtweakLighttint, exec "set ui_filmtweakLighttint 1.1 1.05 0.85"; )
+	CHOICE_TINTEDIT( 10, "r_filmtweakdarktint", r_filmtweakdarktint, ui_filmtweakdarktint, exec "set ui_filmtweakdarktint 0.7 0.85 1"; )
+	
+	CHOICE_SEPARATOR( CHOICE_SEP_3 )
+	
+	CHOICE_BUTTON_VIS( 11, "Apply Changes(A)", 
+		exec "setfromdvar r_gamma ui_gamma"; exec "setfromdvar r_filmtweakbrightness ui_filmtweakbrightness"; exec "setfromdvar r_filmtweakDesaturation ui_filmtweakDesaturation";exec "setfromdvar r_filmtweakContrast ui_filmtweakContrast"; exec "setfromdvar r_filmtweakLighttint ui_filmtweakLighttint"; exec "setfromdvar r_filmtweakdarktint ui_filmtweakdarktint";,
+		when( dvarstring(r_gamma)!=dvarstring(ui_gamma) || dvarstring(r_filmtweakbrightness)!=dvarstring(ui_filmtweakbrightness) || dvarstring(r_filmtweakDesaturation)!=dvarstring(ui_filmtweakDesaturation) || dvarstring(r_filmtweakContrast)!=dvarstring(ui_filmtweakContrast) || dvarstring(r_filmtweakLighttint)!=dvarstring(ui_filmtweakLighttint) || dvarstring(r_filmtweakdarktint)!=dvarstring(ui_filmtweakdarktint) ) )
+	
+	CHOICE_BUTTON_VIS( 12, "Undo All Changes(Z)", 
+		exec "setfromdvar ui_gamma r_gamma"; exec "setfromdvar ui_filmtweakbrightness r_filmtweakbrightness"; exec "setfromdvar ui_filmtweakDesaturation r_filmtweakDesaturation";exec "setfromdvar ui_filmtweakContrast r_filmtweakContrast"; exec "setfromdvar ui_filmtweakLighttint r_filmtweakLighttint"; exec "setfromdvar ui_filmtweakdarktint r_filmtweakdarktint";, 
+		when( dvarstring(ui_gamma)!=dvarstring(r_gamma) || dvarstring(ui_filmtweakbrightness)!=dvarstring(r_filmtweakbrightness) || dvarstring(ui_filmtweakDesaturation)!=dvarstring(r_filmtweakDesaturation) || dvarstring(ui_filmtweakContrast)!=dvarstring(r_filmtweakContrast) || dvarstring(ui_filmtweakLighttint)!=dvarstring(r_filmtweakLighttint) || dvarstring(ui_filmtweakdarktint)!=dvarstring(r_filmtweakdarktint) ) )
+	
+	CHOICE_BUTTON_VIS( 14, "Reset to Default(R)",
+		exec "set ui_gamma 0.8"; exec "set ui_filmtweakbrightness 0"; exec "set ui_filmtweakDesaturation 0.2"; exec "set ui_filmtweakContrast 0.4";exec "set ui_filmtweakLighttint 1.1 1.05 0.85"; exec "set ui_filmtweakdarktint 0.7 0.85 1";,
+		when( dvarstring(ui_gamma)!="0.8" || dvarstring(ui_filmtweakbrightness)!="0" || dvarstring(ui_filmtweakDesaturation)!="0.2" || dvarstring(ui_filmtweakContrast)!="0.4" || dvarstring(ui_filmtweakLighttint)!="1.1 1.05 0.85" || dvarstring(ui_filmtweakdarktint)!="0.7 0.85 1" ) )
+	
+}

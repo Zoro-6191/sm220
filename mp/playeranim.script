@@ -12,18 +12,6 @@ STATE COMBAT
 {
 	idle
 	{
-		mounted mg42, firing
-		{
-			both standSAWgunner_aim turretanim
-		}
-		mounted mg42
-		{
-			both standSAWgunner_aim turretanim
-		}
-		perk laststand
-		{
-			both pb_laststand_idle
-		}
 		playerAnimType none
 		{
 			both pb_stand_alert
@@ -44,14 +32,6 @@ STATE COMBAT
 		{
 			both pb_stand_alert_pistol
 		}
-		weaponclass rocketlauncher, weapon_position ads
-		{
-			both pb_stand_ads_RPG
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_stand_alert_RPG
-		}
 		weapon_position ads
 		{
 			both pb_stand_ads
@@ -67,18 +47,6 @@ STATE COMBAT
 	}
 	idlecr
 	{
-		mounted mg42, firing
-		{
-			both crouchSAWgunner_aim turretanim
-		}
-		mounted mg42
-		{
-			both crouchSAWgunner_aim turretanim
-		}
-		perk laststand
-		{
-			both pb_laststand_idle
-		}
 		playerAnimType none
 		{
 			both pb_crouch_bombplant
@@ -99,14 +67,6 @@ STATE COMBAT
 		{
 			both pb_crouch_alert_pistol
 		}
-		weaponclass rocketlauncher, weapon_position ads
-		{
-			both pb_crouch_ads_RPG
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_crouch_alert_RPG
-		}
 		weaponclass grenade, playerAnimType all NOT m203
 		{
 			both pb_crouch_grenade_pullpin
@@ -122,18 +82,6 @@ STATE COMBAT
 	}
 	idleprone
 	{
-		mounted mg42, firing
-		{
-			both proneSAWgunner_aim turretanim
-		}
-		mounted mg42
-		{
-			both proneSAWgunner_aim turretanim
-		}
-		perk laststand
-		{
-			both pb_laststand_idle
-		}
 		playerAnimType briefcase
 		{
 			both pb_prone_bombplant
@@ -149,10 +97,6 @@ STATE COMBAT
 		weaponclass pistol
 		{
 			both pb_prone_aim_pistol
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_prone_aim_RPG
 		}
 		weaponclass grenade, playerAnimType all NOT m203
 		{
@@ -407,18 +351,6 @@ STATE COMBAT
 		{
 			both pb_hold_run
 		}
-		weaponclass rocketlauncher, strafing left
-		{
-			both pb_walk_left_RPG_ads
-		}
-		weaponclass rocketlauncher, strafing right
-		{
-			both pb_walk_right_RPG_ads
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_walk_forward_RPG_ads
-		}
 		weaponclass pistol , strafing left
 		{
 			both pb_combatwalk_left_loop_pistol
@@ -465,10 +397,6 @@ STATE COMBAT
 		playerAnimType hold
 		{
 			both pb_hold_run_back
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_walk_back_RPG_ads
 		}
 		weaponclass pistol, strafing left
 		{
@@ -517,18 +445,6 @@ STATE COMBAT
 		{
 			both pb_crouch_hold_run
 		}
-		weaponclass rocketlauncher, strafing left
-		{
-			both pb_crouch_walk_left_RPG
-		}
-		weaponclass rocketlauncher, strafing right
-		{
-			both pb_crouch_walk_right_RPG
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_crouch_walk_forward_RPG
-		}
 		weaponclass pistol AND grenade, strafing left, playerAnimType all NOT m203
 		{
 			both pb_crouch_walk_left_pistol
@@ -563,10 +479,6 @@ STATE COMBAT
 		playerAnimType hold
 		{
 			both pb_crouch_hold_run_back
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_crouch_walk_back_RPG
 		}
 		weaponclass pistol AND grenade, strafing left, playerAnimType all NOT m203
 		{
@@ -689,18 +601,6 @@ STATE COMBAT
 		{
 			both pb_hold_run
 		}
-		weaponclass rocketlauncher, strafing left
-		{
-			both pb_combatrun_left_RPG
-		}
-		weaponclass rocketlauncher, strafing right
-		{
-			both pb_combatrun_right_RPG
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_combatrun_forward_RPG
-		}
 		weaponclass pistol, strafing left
 		{
 			both pb_combatrun_left_loop_pistol
@@ -763,10 +663,6 @@ STATE COMBAT
 		{
 			both pb_sprint_pistol
 		}
-		weaponclass rocketlauncher
-		{
-			both pb_sprint_RPG
-		}
 		default
 		{
 			both pb_sprint
@@ -806,10 +702,6 @@ STATE COMBAT
 		{
 			both pb_combatrun_back_loop_grenade
 		}
-		weaponclass rocketlauncher
-		{
-			both pb_combatrun_back_RPG
-		}
 		strafing left
 		{
 			both pb_combatrun_left_loop
@@ -828,18 +720,6 @@ STATE COMBAT
 		playerAnimType none
 		{
 			both pb_crouch_run_forward_grenade
-		}
-		weaponclass rocketlauncher, strafing left
-		{
-			both pb_crouch_run_left_RPG
-		}
-		weaponclass rocketlauncher, strafing right
-		{
-			both pb_crouch_run_right_RPG
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_crouch_run_forward_RPG
 		}
 		weaponclass pistol, strafing left
 		{
@@ -895,10 +775,6 @@ STATE COMBAT
 		playerAnimType none
 		{
 			both pb_crouch_run_back_grenade
-		}
-		weaponclass rocketlauncher
-		{
-			both pb_crouch_run_back_RPG
 		}
 		weaponclass pistol, strafing left
 		{
@@ -1045,13 +921,6 @@ EVENTS
 
 fireweapon
 {
-	mounted mg42
-	{
-	}
-	perk laststand
-	{
-		torso pt_laststand_fire
-	}
 	weaponclass pistol, movetype prone
 	{
 		torso pt_prone_shoot_pistol
@@ -1097,21 +966,6 @@ fireweapon
 	weaponclass autofire
 	{
 		torso pt_stand_shoot_auto duration 150
-	}
-	weaponclass rocketlauncher, movetype moving
-	{
-	}
-	weaponclass rocketlauncher, movetype crouching
-	{
-		torso pt_crouch_shoot_ads
-	}
-	weaponclass rocketlauncher, movetype prone
-	{
-		torso pt_prone_shoot_RPG
-	}
-	weaponclass rocketlauncher
-	{
-		torso pt_stand_shoot_RPG
 	}
 	weaponclass grenade, movetype prone, playerAnimType hold
 	{
@@ -1205,11 +1059,13 @@ prone_to_crouch
 {
 	movetype moving
 	{
-		both pb_prone2crouchrun
+		//fixed the animation duration while moving for prone_to_crouch
+		both pb_prone2crouchrun duration 1
 	}
 	default
 	{
-		both pb_prone2crouch
+		//fixed the animation duration for prone_to_crouch
+		both pb_prone2crouch duration 1
 	}
 }
 
@@ -1217,7 +1073,8 @@ crouch_to_prone
 {
 	default
 	{
-		both pb_crouch2prone
+		//fixed the animation duration for crouch_to_prone
+		both pb_crouch2prone duration 1
 	}
 }
 
@@ -1297,10 +1154,6 @@ raiseweapon
 
 reload
 {
-	perk laststand
-	{
-		torso pt_laststand_reload
-	}
 	weaponclass pistol, movetype idlecr
 	{
 		torso pt_reload_crouch_pistol
@@ -1312,14 +1165,6 @@ reload
 	weaponclass pistol, movetype prone
 	{
 		torso pt_reload_prone_pistol
-	}
-	weaponclass rocketlauncher, movetype prone
-	{
-		torso pt_reload_prone_RPG
-	}
-	weaponclass rocketlauncher
-	{
-		torso pt_reload_stand_RPG
 	}
 	weaponclass pistol
 	{
@@ -1385,14 +1230,6 @@ jump
 	{
 		both pb_standjump_takeoff duration 5 blendtime 100
 	}
-	weaponclass rocketlauncher, movetype run
-	{
-		both pb_runjump_takeoff duration 5 blendtime 100
-	}
-	weaponclass rocketlauncher
-	{
-		both pb_standjump_takeoff duration 5 blendtime 100
-	}
 	movetype run
 	{
 		both pb_runjump_takeoff duration 5 blendtime 100
@@ -1414,14 +1251,6 @@ jumpbk
 		both pb_standjump_takeoff duration 5 blendtime 100
 	}
 	playerAnimType none
-	{
-		both pb_standjump_takeoff duration 5 blendtime 100
-	}
-	weaponclass rocketlauncher, movetype run
-	{
-		both pb_standjump_takeoff duration 5 blendtime 100
-	}
-	weaponclass rocketlauncher
 	{
 		both pb_standjump_takeoff duration 5 blendtime 100
 	}
@@ -1480,18 +1309,6 @@ shellshock
 
 DEATH
 {
-	movetype crouching, perk laststand
-	{
-		both pb_laststand_death
-	}
-	movetype prone, perk laststand
-	{
-		both pb_laststand_death
-	}
-	perk laststand
-	{
-		both pb_laststand_death
-	}
 	movetype prone
 	{
 		both pb_prone_death_quickdeath

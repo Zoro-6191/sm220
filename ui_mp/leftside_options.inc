@@ -1,0 +1,39 @@
+blurWorld		7.0
+
+PREPROC_SHADER_DRAW( -120 0 880 480, 0 0, "white", 0 0 0 0.75, 0, 1, 0 0 0 0 )
+
+#undef BACK_OPEN
+#define BACK_OPEN exec "wait";
+#include "ui_mp/navcontrols.inc"
+
+CHOICE_MENU_TITLE( "@MENU_OPTIONS" )
+
+#undef CHOICE_X_START
+#define CHOICE_X_START		-324
+
+#undef CHOICE_HORIZONTAL_ALIGN
+#define CHOICE_HORIZONTAL_ALIGN HORIZONTAL_ALIGN_CENTER
+
+#undef CHOICE_VERTICAL_ALIGN
+#define CHOICE_VERTICAL_ALIGN VERTICAL_ALIGN_TOP
+
+#include "ui_mp/_button.inc"
+
+CHOICE_BUTTON( 2, "@MENU_GRAPHICS", LOCAL_CLOSE_ALL open options_graphics )
+CHOICE_BUTTON( 3, "@MENU_TEXTURE_SETTINGS", LOCAL_CLOSE_ALL  open options_graphics_texture )
+CHOICE_BUTTON( 4, "@MENU_SOUND", LOCAL_CLOSE_ALL open options_sound )
+CHOICE_BUTTON( 5, "@MENU_GAME_OPTIONS", LOCAL_CLOSE_ALL open options_game )
+CHOICE_BUTTON( 6, "@MENU_MULTIPLAYER_OPTIONS", LOCAL_CLOSE_ALL open options_multi )
+
+#undef TEXTSIZE_BUTTON_PC
+#define TEXTSIZE_BUTTON_PC	0.33
+
+#undef CHOICE_SIZE_Y
+#define CHOICE_SIZE_Y 		20
+
+
+#undef	CHOICE_SIZE_X
+#define CHOICE_SIZE_X		180
+
+#undef  SECTION_X_OFFSET
+#define SECTION_X_OFFSET 	60

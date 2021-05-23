@@ -1,0 +1,61 @@
+#include "ui/menudef.h"
+#include "ui_mp/common_macro.inc"
+#define OPTIONS_STYLE			1
+#include "ui_mp/menustyle.inc"
+#include "ui/choices_setup_common.menu"
+
+{
+	menuDef 
+	{
+		name			options_game
+		fullScreen		0
+		rect			0 0 640 480
+		focusColor		COLOR_FOCUSED
+		soundloop		""
+		onOpen
+		{
+			close options_look;
+			close options_move;
+			close options_shoot;
+			close options_misc;
+			close options_graphics;
+			close options_sound;
+			close options_view;
+			close options_defaults;
+			close options_driverinfo;
+			close options_credits;
+			close options_multi;
+			close options_graphics_defaults;
+			close options_graphics_texture;
+			close options_control_defaults;
+
+			setLocalVarBool ui_hideBack 1;
+		}
+		onClose		{ setLocalVarBool ui_hideBack 0; }
+		onESC 		{ close self; }
+		#include "ui_mp/leftside_options.inc"
+		
+		CHOICE_SECTION_TITLE( 21, "@MENU_GAME_OPTIONS" )
+		
+		CHOICE_DVARYESNO( 22, "@MENU_SHOW_BLOOD", cg_blood, ; )
+		CHOICE_DVARFLOATLIST( 23, "@MENU_ENABLE_CONSOLE", monkeytoy, { "@MENU_YES" 0 "@MENU_NO" 1 }, ; )
+		
+		CHOICE_SECTION_TITLE( 24, "Ping Options" )
+		CHOICE_BIND( 25, "Ping Key", "openscriptmenu -1 ping", ; )
+		CHOICE_DBUTTON_VIS( 26, "Ping Color", 1 )
+
+		#define KF_NUM 27
+		CHOICE_SECTION_TITLE( KF_NUM, "Killfeed Options" )
+		CHOICE_DVARFLOATLIST( KF_NUM+1, "Killfeed Time", con_gamemsgwindow0msgtime, { "5 Seconds" 5 "15 Seconds" 15 "Infinite" 999 }, ; )
+		CHOICE_DVARFLOATLIST( KF_NUM+2, "Killfeed Line Count", con_gamemsgwindow0linecount, { "4 (Default)" 4 "5" 5 "6" 6 "7" 7 "8" 8 "9 (Max)" 9 }, ; )
+		
+		#define CH_NUM 30
+		CHOICE_SECTION_TITLE( CH_NUM, "Chat Options" )
+		CHOICE_DVARFLOATLIST( CH_NUM+1, "All Chat", cg_chattime, { "Disabled" 0 "Enabled" 12000 }, ; )
+		CHOICE_DVARFLOATLIST( CH_NUM+2, "Team Chat Only", cg_teamchatsonly, { "Disabled" 0 "Enabled" 1 }, ; )
+		CHOICE_DVARFLOATLIST( CH_NUM+3, "Chat Line Count", cg_chatheight, { "0 (Off)" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7 "8 (Default)" 8 }, ; )
+		// to-do: chat position( not possible through these methods, its a 2d vector )
+		
+		
+	}
+}
